@@ -1,0 +1,21 @@
+{
+  // 打开项目时，VSCode 会弹出提示建议安装这些扩展
+  "recommendations": [
+    // ============ 必装：Vue/Nuxt 开发核心 ============
+    "Vue.volar", // Vue - Official：Vue3/Nuxt 语法高亮、类型检查（就是 Volar）
+    "dbaeumer.vscode-eslint", // ESLint：实时标红 + 保存自动修复
+    "esbenp.prettier-vscode", // Prettier：保存时格式化代码
+
+    // ============ 推荐：配合 Nuxt UI（基于 Tailwind CSS）============
+    "bradlc.vscode-tailwindcss", // Tailwind CSS 智能提示：类名补全、颜色预览、hover 提示
+
+    // ============ 可选：体验增强 ============
+    "usernamehw.errorlens", // Error Lens：错误信息直接显示在代码行尾，不用鼠标悬停
+    "EditorConfig.EditorConfig" // EditorConfig 支持（新版 VSCode 已内置，装上更完整）
+  ],
+
+  // ============ 必须禁用：会和上面的扩展冲突 ============
+  "unwantedRecommendations": [
+    "octref.vetur" // Vetur 是 Vue2 时代的扩展，和 Volar 冲突，装了会导致 Nuxt3/4 各种报错
+  ]
+}

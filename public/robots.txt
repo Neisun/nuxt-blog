@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow:
+
+Sitemap: https://blog.myhns.cn/sitemap.xml

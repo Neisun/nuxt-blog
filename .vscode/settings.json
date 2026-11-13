@@ -1,0 +1,19 @@
+{
+  // 保存文件时自动格式化代码
+  // 这是"个人习惯"类配置，如果你更想放用户级(~/.vscode/settings.json)也完全可以
+  "editor.formatOnSave": true,
+
+  // 指定默认格式化器为 Prettier
+  // 注意：这里用的是 Prettier 扩展的 ID，不是扩展名
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 保存时额外执行的动作
+  "editor.codeActionsOnSave": {
+    // 让 ESLint 自动修复问题（如删除未使用变量、修复 import 顺序等）
+    // "explicit" 是新版 VSCode 的写法，老教程写的 true 会报"已废弃"警告
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // 让 ESLint 检查的文件类型（加上 vue，否则 .vue 文件不会被 ESLint 检查）
+  "eslint.validate": ["javascript", "typescript", "vue"]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "nuxt-blog",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
+    "prepare": "husky",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.16.2",
+    "@nuxt/eslint": "^1.17.0",
+    "@nuxt/fonts": "^1.2.0",
+    "@nuxt/ui": "^4.12.0",
+    "better-sqlite3": "^13.1.1",
+    "eslint": "^10.14.0",
+    "nuxt": "^4.6.4",
+    "qrcode": "^1.5.4",
+    "vue": "^3.5.45",
+    "vue-router": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.6",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.10",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.14"
+  }
+}
