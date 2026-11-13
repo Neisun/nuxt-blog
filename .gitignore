@@ -22,3 +22,6 @@ logs
 .env
 .env.*
 !.env.example
+
+# Local todo (not to be committed)
+TODO.md

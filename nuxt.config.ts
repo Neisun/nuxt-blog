@@ -18,6 +18,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: process.env.NUXT_SITE_URL || 'https://blog.myhns.cn',
+      artalk: {
+        server: process.env.NUXT_PUBLIC_ARTALK_SERVER || '',
+        site: process.env.NUXT_PUBLIC_ARTALK_SITE || '',
+      },
     },
   },
   nitro: {

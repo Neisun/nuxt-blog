@@ -77,8 +77,8 @@ const stats = computed(() => {
         <div class="flex items-center gap-3 rounded-lg border border-default/10 bg-elevated/50 p-4">
           <UIcon name="i-lucide-message-circle" class="size-5 text-muted" />
           <div>
-            <p class="text-xs text-muted">微信</p>
-            <p class="mt-0.5 text-sm font-medium text-default">Neisun</p>
+            <p class="text-xs text-muted">微信号</p>
+            <p class="mt-0.5 text-sm font-medium text-default">Neisun_HU</p>
           </div>
         </div>
       </div>

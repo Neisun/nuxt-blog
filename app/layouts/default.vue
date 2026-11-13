@@ -31,14 +31,17 @@ const searchGroups = computed(() => [
 </script>
 
 <template>
-  <UHeader title="胡乃嵩的博客">
+  <UHeader>
+    <template #title>
+      <h1 class="md:text-xl text-base">胡乃嵩的博客</h1>
+    </template>
     <template #right>
       <nav class="flex items-center gap-1">
         <ULink
           v-for="item in navigation"
           :key="item.to"
           :to="item.to"
-          class="rounded-md px-2.5 py-1.5 text-sm transition-colors"
+          class="rounded-md px-2.5 py-1.5 text-sm transition-colors hidden sm:block"
           active-class="bg-elevated/50 font-medium text-default"
           inactive-class="text-muted hover:text-default"
         >
@@ -50,6 +53,11 @@ const searchGroups = computed(() => [
         <UColorModeButton />
       </nav>
     </template>
+
+    <!-- 下拉导航菜单 -->
+    <template #body>
+      <UNavigationMenu :items="navigation" orientation="vertical" class="-mx-2.5" />
+    </template>
   </UHeader>
 
   <UContentSearch
@@ -58,7 +66,10 @@ const searchGroups = computed(() => [
     :color-mode="false"
     title="搜索文章"
     placeholder="搜索文章..."
-    :ui="{ root: 'h-full' }"
+    :ui="{
+      modal: 'w-[calc(100vw-3rem)] max-w-md max-h-[80dvh] sm:max-w-3xl sm:h-[28rem]',
+      root: 'h-full',
+    }"
   >
     <template #empty="{ searchTerm }">
       {{ searchTerm ? `没有找到与「${searchTerm}」相关的文章` : '输入关键词开始搜索' }}
@@ -81,6 +92,8 @@ const searchGroups = computed(() => [
       </div>
     </template>
   </UFooter>
+
+  <BackToTop />
 </template>
 
 <style scoped></style>

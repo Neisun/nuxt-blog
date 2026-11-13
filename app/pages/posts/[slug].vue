@@ -2,6 +2,7 @@
 const route = useRoute()
 const slug = Number(route.params.slug)
 
+// 获取当前文章
 const { data: post } = await useAsyncData(`post-${slug}`, async () => {
   return queryCollection('posts').where('slug', '=', slug).first()
 })
@@ -10,12 +11,15 @@ const { origin } = useRequestURL()
 const pageUrl = computed(() => `${origin}${route.path}`)
 
 type SurroundLink = { title: string; description?: string; path: string }
-
+// 查找上下篇文章
 const { data: surround } = await useAsyncData<SurroundLink[]>(`surround-${slug}`, async () => {
+  // 先找所有 按slug升序排列
   const list = await queryCollection('posts').order('slug', 'ASC').all()
+  // 找到当前slug所在列表的下标
   const index = list.findIndex((p) => p.slug === slug)
   if (index === -1) return []
 
+  // 构造Link所需属性的函数，这里有一些ts的使用技巧，就是 (typeof array)[number]可以找到这一项的类型
   const toLink = (p?: (typeof list)[number]): SurroundLink | null =>
     p
       ? {
@@ -231,6 +235,17 @@ const openWechat = async () => {
 
       <USeparator />
 
+      <!-- 评论 -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-lg font-semibold text-default">
+          <UIcon name="i-lucide-message-circle" />
+          <span>评论</span>
+        </div>
+        <ArtalkComment :page-key="route.path" :page-title="post.title" />
+      </div>
+
+      <USeparator />
+
       <!-- 相关文章 -->
       <div v-if="related?.length" class="space-y-4">
         <div class="flex items-center gap-2 text-lg font-semibold text-default">
@@ -256,7 +271,7 @@ const openWechat = async () => {
     </UPageBody>
 
     <template #right>
-      <UContentToc :links="post.body.toc?.links" />
+      <UContentToc title="文章大纲" :links="post.body.toc?.links" />
     </template>
   </UPage>
 
