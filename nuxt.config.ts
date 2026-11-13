@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/content', '@nuxt/ui'],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  icon: {
+    clientBundle: {
+      scan: true,
+    },
+  },
   fonts: {
     providers: {
       google: false,
