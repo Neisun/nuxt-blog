@@ -30,6 +30,9 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Generate static site
+        env:
+          NUXT_PUBLIC_ARTALK_SERVER: ${{ secrets.NUXT_PUBLIC_ARTALK_SERVER }}
+          NUXT_PUBLIC_ARTALK_SITE: ${{ secrets.NUXT_PUBLIC_ARTALK_SITE }}
         run: pnpm generate
 
       - name: Install ossutil
