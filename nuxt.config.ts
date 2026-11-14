@@ -69,6 +69,13 @@ export default defineNuxtConfig({
           href: '/feed.xml',
         },
       ],
+      // 接入百度统计
+      script: [
+        {
+          src: 'https://hm.baidu.com/hm.js?f6dc9ffb774014b50dbe65f0a78608d3',
+          async: true,
+        },
+      ],
     },
   },
 })
