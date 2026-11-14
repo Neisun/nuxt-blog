@@ -131,6 +131,33 @@ curl -I -H "Host: comment.myhns.cn" http://123.57.228.104/
 
 ---
 
+## 八、表情包 CDN 镜像配置（国内访问）
+
+### 问题
+
+Artalk 默认从 `https://cdn.jsdelivr.net/gh/ArtalkJS/Emoticons/grps/default.json` 加载表情包，但 `cdn.jsdelivr.net` 在国内访问不稳定（连接被重置），导致评论框表情加载失败：
+
+```
+GET https://cdn.jsdelivr.net/gh/ArtalkJS/Emoticons/grps/default.json net::ERR_CONNECTION_RESET
+[Emoticons] Load Failed: TypeError: Failed to fetch
+```
+
+### 解决
+
+前端初始化时通过 `emoticons` 配置项改用 `fastly.jsdelivr.net` 镜像（国内可访问）：
+
+```ts
+Artalk.init({
+  // ...其余配置
+  emoticons:
+    "https://fastly.jsdelivr.net/gh/ArtalkJS/Emoticons/grps/default.json",
+});
+```
+
+> 实测（2026-11）：`fastly.jsdelivr.net` 返回 200，`cdn.jsdelivr.net` 连接失败。
+
+---
+
 ## 后续事项
 
 1. 确认 DNS A 记录 `comment.myhns.cn` 已指向 `123.57.228.104`

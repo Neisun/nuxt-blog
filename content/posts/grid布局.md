@@ -3,13 +3,14 @@ slug: 536
 title: grid布局
 date: 2017-12-26 09:45:00
 tags:
-    - css3
+  - css3
 categories:
-    - 技术随笔
-    - 页面效果
+  - 技术随笔
+  - 页面效果
 description: "讲解 CSS Grid 网格布局的用法。介绍 grid 容器与项目的关键属性，通过示例展示二维布局的灵活与强大。"
 image: /images/covers/081.jpg
 ---
+
 ## grid布局，可能主导未来布局方式
 
 这话，说的很大。但不是我说的，我也只是引用。不过话也说过来，正是因为看到了可能主导未来，才引起我的注意，我才会来研究一下他的使用方式。
@@ -22,50 +23,52 @@ image: /images/covers/081.jpg
 
 ```html
 <div class="wrapper">
-    <div class="item1"></div>
-    <div class="item2"></div>
-    <div class="item3"></div>
-    <div class="item4"></div>
-    <div class="item5"></div>
-    <div class="item6"></div>
+  <div class="item1"></div>
+  <div class="item2"></div>
+  <div class="item3"></div>
+  <div class="item4"></div>
+  <div class="item5"></div>
+  <div class="item6"></div>
 </div>
 ```
+
 然后，我们给了一个布局。
 
 ```css
 .wrapper {
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 50px 50px;
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 50px 50px;
 }
 
 .item1 {
-    background: red;
+  background: red;
 }
 
 .item2 {
-    background: blue;
+  background: blue;
 }
 
 .item3 {
-    background: green;
+  background: green;
 }
 
 .item4 {
-    background: orange;
+  background: orange;
 }
 
 .item5 {
-    background: yellow;
+  background: yellow;
 }
 
 .item6 {
-    background: purple;
+  background: purple;
 }
 ```
+
 效果图如下
 
-![](/hunaisong.github.io/img/pic01.png)
+![](/images/pic01.png)
 
 总结一下
 
@@ -80,43 +83,43 @@ image: /images/covers/081.jpg
 
 ```css
 .wrapper {
-    display: grid;
-    grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 100px 100px 100px;
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
 }
 ```
-![](/hunaisong.github.io/img/pic02.png)
+
+![](/images/pic02.png)
 
 我想把布局改成让item1独占一行，怎么设置？
 
 ```css
 /* 想让item1独占一行 */
 .item1 {
-    background: red;
-    grid-column-start: 1;
-    grid-column-end: 4;
+  background: red;
+  grid-column-start: 1;
+  grid-column-end: 4;
 }
 ```
 
-![](/hunaisong.github.io/img/pic03.png)
+![](/images/pic03.png)
 
 - 容易困惑的地方，`grid-column-start`与`grid-column-end`后边的数字是什么意思。这个数字就是我们分成三份，实际上是有四条边界线。看图就理解了。
 
-![](/hunaisong.github.io/img/pic04.png)
-
+![](/images/pic04.png)
 
 如果我想让item2占据两行，怎么设置，根据上边的设置，我们很快就想到，我们应该这么设置。
 
 ```css
 /* 想让item2独占两行 */
 .item2 {
-    background: blue;
-    grid-row-start: 2;
-    grid-row-end: 4;
+  background: blue;
+  grid-row-start: 2;
+  grid-row-end: 4;
 }
 ```
 
-![](/hunaisong.github.io/img/pic05.png)
+![](/images/pic05.png)
 
 grid布局好倒是好，就是提供了众多的属性和配置，反倒显得繁琐了。
 

@@ -34,6 +34,7 @@ onMounted(() => {
       pageKey: props.pageKey,
       pageTitle: props.pageTitle,
       darkMode: 'auto',
+      emoticons: 'https://fastly.jsdelivr.net/gh/ArtalkJS/Emoticons/grps/default.json',
     })
   }
   document.body.appendChild(script)
