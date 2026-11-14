@@ -52,7 +52,7 @@ export default defineNuxtConfig({
           property: 'og:description',
           content: '胡乃嵩的个人博客，记录现代前端、服务端开发与 AI 应用方向的实践与思考。',
         },
-        { property: 'og:image', content: '/images/avatar.jpg' },
+        { property: 'og:image', content: '/images/avatar.png' },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: '胡乃嵩的博客' },
         {

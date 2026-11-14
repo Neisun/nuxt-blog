@@ -27,7 +27,7 @@ const stats = computed(() => {
     <!-- 头部卡片 -->
     <section class="rounded-2xl border border-default/10 bg-elevated/50 p-8">
       <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
-        <UAvatar src="/images/avatar.jpg" alt="胡乃嵩" size="2xl" />
+        <UAvatar src="/images/avatar.png" alt="胡乃嵩" size="2xl" />
         <div class="text-center sm:text-left">
           <h1 class="text-3xl font-bold">胡乃嵩</h1>
           <div class="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">

@@ -52,7 +52,7 @@ const { data: related } = await useAsyncData(`related-${slug}`, async () => {
 // 作者信息（与首页一致）
 const author = {
   name: '胡乃嵩',
-  avatar: { src: '/images/avatar.jpg', alt: '胡乃嵩' },
+  avatar: { src: '/images/avatar.png', alt: '胡乃嵩' },
 }
 
 // 格式化发布时间：2017-07-12 14:15:29 -> 2017年7月12日

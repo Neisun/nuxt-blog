@@ -5,7 +5,7 @@ const authors = ref<UserProps[]>([
     name: '胡乃嵩',
     description: 'hunaisong',
     avatar: {
-      src: '/images/avatar.jpg',
+      src: '/images/avatar.png',
       loading: 'lazy',
     },
   },
@@ -34,7 +34,7 @@ const scrollToPosts = () => {
 const { origin } = useRequestURL()
 useSeoMeta({
   ogUrl: () => `${origin}/`,
-  ogImage: () => `${origin}/images/avatar.jpg`,
+  ogImage: () => `${origin}/images/avatar.png`,
 })
 useHead({
   link: [{ rel: 'canonical', href: `${origin}/` }],
@@ -74,7 +74,7 @@ const total = computed(() => Number(data.value?.total ?? 0))
       />
 
       <div class="relative z-10 mx-auto w-full max-w-3xl px-4 py-24 text-center">
-        <UAvatar src="/images/avatar.jpg" alt="胡乃嵩" size="2xl" class="ring-2 ring-white/60" />
+        <UAvatar src="/images/avatar.png" alt="胡乃嵩" size="2xl" class="ring-2 ring-white/60" />
         <h1 class="mt-4 text-3xl font-bold text-white sm:text-4xl">胡乃嵩</h1>
         <div class="mt-3 flex flex-wrap justify-center gap-2">
           <UBadge v-for="role in roles" :key="role.label" :color="role.color" variant="solid">
