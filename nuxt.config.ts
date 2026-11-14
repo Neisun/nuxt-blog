@@ -73,7 +73,6 @@ export default defineNuxtConfig({
       script: [
         {
           src: 'https://hm.baidu.com/hm.js?9b0d77e9822c91ddd7cdb157e5a782ec',
-          async: true,
         },
       ],
     },
