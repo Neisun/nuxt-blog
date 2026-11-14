@@ -69,14 +69,20 @@ export default defineNuxtConfig({
           href: '/feed.xml',
         },
       ],
-      // 接入百度统计
       script: [
+        // 接入百度统计
         {
           src: 'https://hm.baidu.com/hm.js?9b0d77e9822c91ddd7cdb157e5a782ec',
         },
+        // 接入不蒜子
         {
           src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js',
           async: true,
+        },
+        // 接入阿里云用户体验监控 UEM（RUM）
+        {
+          innerHTML: `!(function(c,b,d,a){c[a]||(c[a]={});c[a]={endpoint:'https://proj-xtrace-53a481f95bc6b6a0e66684c566b4c574-cn-beijing.cn-beijing.log.aliyuncs.com/rum/web/v2?workspace=default-cms-1296498984870663-cn-beijing&service_id=crkjeszabr@1af3d2e1fb111749e665f',env:'prod',spaMode:'history',collectors:{perf:true,webVitals:true,api:true,staticResource:true,jsError:true,consoleError:true,click:{enable:true,trackUserInteractions:true}},tracing:false,replay:false};with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)})(window,document,"//sdk.rum.aliyuncs.com/v2/browser-sdk.js","__rum");`,
+          type: 'text/javascript',
         },
       ],
     },
