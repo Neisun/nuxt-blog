@@ -72,7 +72,7 @@ export default defineNuxtConfig({
       // 接入百度统计
       script: [
         {
-          src: 'https://hm.baidu.com/hm.js?f6dc9ffb774014b50dbe65f0a78608d3',
+          src: 'https://hm.baidu.com/hm.js?9b0d77e9822c91ddd7cdb157e5a782ec',
           async: true,
         },
       ],
