@@ -38,7 +38,7 @@
 3. 首次进入会提示「开通服务」并创建默认工作台（workspace），确认开通；
 4. 开通后进入「接入中心」，选择「前端应用 → Web」；
 5. 创建应用：名称填 `my-blog`，类型选 `Web`；
-6. 创建后，在「接入向导」里拿到 **`pid`** 和接入脚本。
+6. 创建后，在「接入向导」里拿到接入脚本（脚本内 `endpoint` 即应用专属的上报地址）。
 
 ---
 
@@ -48,13 +48,15 @@
 
 ```html
 <script>
-    !(function(c,b,d,a){c[a]||(c[a]={});c[a]=
-    { 
-    endpoint: 'https://proj-xtrace-53a481f95bc6b6a0e66684c566b4c574-cn-beijing.cn-beijing.log.aliyuncs.com/rum/web/v2?workspace=default-cms-1296498984870663-cn-beijing&service_id=crkjeszabr@1af3d2e1fb111749e665f',
+  !(function (c, b, d, a) {
+    c[a] || (c[a] = {});
+    c[a] = {
+      endpoint:
+        "https://proj-xtrace-53a481f95bc6b6a0e66684c566b4c574-cn-beijing.cn-beijing.log.aliyuncs.com/rum/web/v2?workspace=default-cms-1296498984870663-cn-beijing&service_id=crkjeszabr@1af3d2e1fb111749e665f",
       // 设置环境信息，参考值：'prod' | 'gray' | 'pre' | 'daily' | 'local'
-      env: 'prod', 
+      env: "prod",
       // 设置路由模式， 参考值：'history' | 'hash'
-      spaMode: 'history',
+      spaMode: "history",
       collectors: {
         // 页面性能指标监听开关，默认开启
         perf: true,
@@ -71,38 +73,53 @@
         // 用户行为监听开关，默认开启，trackUserInteractions 开启后追踪所有用户交互元素，支持热力图分析
         click: {
           enable: true,
-          trackUserInteractions: true
+          trackUserInteractions: true,
         },
       },
       // 链路追踪配置开关，默认关闭
       tracing: false,
       // SessionReplay会话回放开关，默认关闭，默认采样率 1%
       replay: false,
-    }
-    with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)
-})(window, document, "//sdk.rum.aliyuncs.com/v2/browser-sdk.js", "__rum");
+    };
+    with (b)
+      with (body)
+        with (insertBefore(createElement("script"), firstChild))
+          setAttribute("crossorigin", "", (src = d));
+  })(window, document, "//sdk.rum.aliyuncs.com/v2/browser-sdk.js", "__rum");
 </script>
 ```
 
-> ⚠️ 以上为老版 ARMS 前端监控脚本示例，仅作格式参考；新版 UEM 的 `pid` 和脚本内容**以控制台「接入向导」实际生成的为准**。
+> 以上即为新版 UEM（用户体验监控）「接入向导」实际生成的脚本，其中 `endpoint` 为你的应用专属上报地址，直接复制即可，无需再改。
 
 ---
 
 ## 五、Nuxt 落地位置
 
-在 `nuxt.config.ts` 的 `app.head.script` 数组中追加一条**内联脚本**（放在 `head` 里同步执行，**不加 `async`**，尽早初始化以捕获错误）：
+在 `nuxt.config.ts` 的 `app.head.script` 数组中追加一条**内联脚本**，与百度统计、不蒜子并列：
 
 ```ts
 script: [
   // ...已有的百度统计、不蒜子
   {
-    innerHTML: '!(function(c,b,d,a){c[a]||(c[a]={});c[a].config={pid:"your-pid",appType:"web",imgUrl:"https://arms-retcode.aliyuncs.com/r.png?"};with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)})(window,document,"https://retcode.alicdn.com/retcode/bl.js","__bl");',
+    innerHTML: `!(function(c,b,d,a){c[a]||(c[a]={});c[a]={endpoint:'https://proj-xtrace-53a481f95bc6b6a0e66684c566b4c574-cn-beijing.cn-beijing.log.aliyuncs.com/rum/web/v2?workspace=default-cms-1296498984870663-cn-beijing&service_id=crkjeszabr@1af3d2e1fb111749e665f',env:'prod',spaMode:'history',collectors:{perf:true,webVitals:true,api:true,staticResource:true,jsError:true,consoleError:true,click:{enable:true,trackUserInteractions:true}},tracing:false,replay:false};with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)})(window,document,"//sdk.rum.aliyuncs.com/v2/browser-sdk.js","__rum");`,
     type: 'text/javascript',
+    tagPosition: 'bodyOpen',
   },
 ],
 ```
 
-> 落地时用控制台生成的脚本替换 `innerHTML` 内容即可。
+> 说明：
+>
+> - `with(...)insertBefore(createElement("script"), ...)` 是**动态注入** `browser-sdk.js`，动态插入的脚本天然不阻塞首屏渲染，即「异步接入」效果，故无需再额外加 `async`；
+> - 该脚本内部 `with(body)` 依赖 `document.body`，必须放在 `<body>` 起始处执行（`tagPosition: 'bodyOpen'`）。若放进 `<head>`，脚本执行时 `document.body` 还是 `null`，会抛 `Cannot convert undefined or null to object`。
+
+---
+
+### 5.1 故障排查：`Cannot convert undefined or null to object`
+
+- **现象**：控制台报 `Uncaught TypeError: Cannot convert undefined or null to object`，位置在 `(index):1`；
+- **根因**：接入脚本里的 `with(b)with(body)...` 中 `body` 解析为 `document.body`；脚本被注入到 `<head>`，执行时 `<body>` 尚未解析，`document.body` 为 `null`，`with(null)` 触发该异常；
+- **解决**：给该脚本条目加 `tagPosition: 'bodyOpen'`，让它在 `<body>` 起始处执行，此时 `document.body` 已存在。
 
 ---
 
