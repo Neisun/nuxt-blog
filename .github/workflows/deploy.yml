@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -35,6 +35,15 @@ jobs:
           NUXT_PUBLIC_ARTALK_SITE: ${{ secrets.NUXT_PUBLIC_ARTALK_SITE }}
         run: pnpm generate
 
+      - name: Generate version tag
+        id: version
+        run: echo "tag=v$(date +%Y%m%d-%H%M%S)-$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Package release artifact
+        run: |
+          cd .output/public
+          zip -q -r ../release.zip .
+
       - name: Install ossutil
         run: |
           sudo -v
@@ -57,3 +66,11 @@ jobs:
         run: |
           ossutil rm "oss://${OSS_BUCKET}/" -r -f || true
           ossutil cp -r .output/public/ "oss://${OSS_BUCKET}/" -f
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Release ${{ steps.version.outputs.tag }}
+          files: .output/release.zip
+          generate_release_notes: true
