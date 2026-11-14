@@ -74,6 +74,10 @@ export default defineNuxtConfig({
         {
           src: 'https://hm.baidu.com/hm.js?9b0d77e9822c91ddd7cdb157e5a782ec',
         },
+        {
+          src: 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js',
+          async: true,
+        },
       ],
     },
   },

@@ -81,6 +81,15 @@ const searchGroups = computed(() => [
   <UFooter>
     <template #default>
       <div class="flex flex-col items-center gap-2 text-center">
+        <p class="text-sm text-muted">
+          <span id="busuanzi_container_site_pv">
+            本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+          </span>
+          ·
+          <span id="busuanzi_container_site_uv">
+            访客数 <span id="busuanzi_value_site_uv"></span> 人
+          </span>
+        </p>
         <p class="text-sm text-muted">© 2026 胡乃嵩的博客 · Powered by Nuxt</p>
         <p class="text-sm text-muted flex items-center gap-1">
           <img src="/images/beian.png" class="w-5 h-5" alt="" />

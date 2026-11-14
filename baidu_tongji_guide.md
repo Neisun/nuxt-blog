@@ -41,7 +41,7 @@ app: {
     htmlAttrs: { lang: 'zh-CN' },
     // ...其余 title / meta / link 配置保持不变
     script: [
-      { src: 'https://hm.baidu.com/hm.js?你的统计ID', async: true },
+      { src: 'https://hm.baidu.com/hm.js?你的统计ID' },
     ],
   },
 },

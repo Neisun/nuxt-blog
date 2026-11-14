@@ -161,6 +161,13 @@ const openWechat = async () => {
           <time :datetime="post.date">{{ formatDate(post.date) }}</time>
         </div>
 
+        <div class="flex items-center gap-1.5">
+          <UIcon name="i-lucide-book" />
+          <span id="busuanzi_container_page_pv">
+            阅读 <span id="busuanzi_value_page_pv"></span> 次
+          </span>
+        </div>
+
         <div v-if="post.categories?.length" class="flex items-center gap-1.5">
           <UIcon name="i-lucide-folder" />
           <UBadge
